@@ -2,8 +2,20 @@ let currentUnit = 'C';
 let currentLang = 'PL';
 
 const translations = {
-    PL: { unit: "Jednostka temp.", lang: "Język", theme: "Motyw", feels: "Odczuwalna", wind: "Wiatr", hum: "Wilgotność", pres: "Ciśnienie", clouds: "Zachmurzenie" },
-    EN: { unit: "Temp. Unit", lang: "Language", theme: "Theme", feels: "Feels like", wind: "Wind", hum: "Humidity", pres: "Pressure", clouds: "Clouds" }
+    PL: {
+        settings: "Ustawienia", unit: "Jednostka temp.", lang: "Język", theme: "Motyw",
+        today: "Dzisiaj", tab_today: "DZISIAJ", tab_tomorrow: "JUTRO", tab_14days: "14 DNI",
+        hourly: "Temperatura godzinowa", wind: "Wiatr", hum: "Wilgotność",
+        pres: "Ciśnienie", clouds: "Zachmurzenie", share: "📤 Udostępnij prognozę",
+        feels: "Odczuwalna", search: "Szukaj", back: "← Powrót"
+    },
+    EN: {
+        settings: "Settings", unit: "Temp. Unit", lang: "Language", theme: "Theme",
+        today: "Today", tab_today: "TODAY", tab_tomorrow: "TOMORROW", tab_14days: "14 DAYS",
+        hourly: "Hourly Temperature", wind: "Wind", hum: "Humidity",
+        pres: "Pressure", clouds: "Clouds", share: "📤 Share Forecast",
+        feels: "Feels like", search: "Search", back: "← Back"
+    }
 };
 let myChart = null;
 let weatherData = null;
@@ -22,10 +34,26 @@ function toggleUnit() {
 function toggleLang() {
     currentLang = currentLang === 'PL' ? 'EN' : 'PL';
     document.getElementById('lang-btn').innerText = currentLang;
-    // Оновлюємо тексти в меню
-    document.getElementById('label-unit').innerText = translations[currentLang].unit;
-    document.getElementById('label-lang').innerText = translations[currentLang].lang;
-    document.getElementById('label-theme').innerText = translations[currentLang].theme;
+
+    const t = translations[currentLang];
+
+    // Масовий переклад елементів за ID
+    document.getElementById('t-settings').innerText = t.settings;
+    document.getElementById('label-unit').innerText = t.unit;
+    document.getElementById('label-lang').innerText = t.lang;
+    document.getElementById('label-theme').innerText = t.theme;
+    document.getElementById('date-now').innerText = t.today;
+    document.getElementById('t-today').innerText = t.tab_today;
+    document.getElementById('t-tomorrow').innerText = t.tab_tomorrow;
+    document.getElementById('t-14days').innerText = t.tab_14days;
+    document.getElementById('t-hourly').innerText = t.hourly;
+    document.getElementById('t-wind').innerText = t.wind;
+    document.getElementById('t-hum').innerText = t.hum;
+    document.getElementById('t-pres').innerText = t.pres;
+    document.getElementById('t-clouds').innerText = t.clouds;
+    document.getElementById('share-btn').innerText = t.share;
+
+    // Перемальовуємо дані (для "Feels like" та графіку)
     updateUI('today');
 }
 
@@ -147,12 +175,18 @@ function renderForecastList() {
 }
 
 function getWeatherDesc(code) {
-    if (code === 0) return "Czyste niebo";
-    if (code < 4) return "Częściowe zachmurzenie";
-    if (code < 70) return "Opady deszczu";
-    return "Zachmurzenie";
+    if (currentLang === 'EN') {
+        if (code === 0) return "Clear sky";
+        if (code < 4) return "Partly cloudy";
+        if (code < 70) return "Rainy";
+        return "Cloudy";
+    } else {
+        if (code === 0) return "Czyste niebo";
+        if (code < 4) return "Częściowe zachmurzenie";
+        if (code < 70) return "Opady deszczu";
+        return "Zachmurzenie";
+    }
 }
-
 function getWeatherEmoji(code) {
     if (code === 0) return "☀️";
     if (code < 4) return "⛅";

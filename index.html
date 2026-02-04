@@ -2,7 +2,7 @@
 <html lang="pl">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <title>SkyCast Pro PWA</title>
     <link rel="stylesheet" href="css/style.css">
     <link rel="manifest" href="manifest.json">
@@ -12,26 +12,26 @@
 <body>
     <div id="side-menu" class="side-menu">
         <div class="menu-header">
-            <h3>Ustawienia</h3>
+            <h3 id="t-settings">Ustawienia</h3>
             <button class="close-btn" onclick="toggleMenu()">✕</button>
         </div>
         <div class="menu-content">
-    <div class="menu-item">
-        <span id="label-unit">Jednostka temp.</span>
-        <button class="mini-toggle" onclick="toggleUnit()" id="unit-btn">°C</button>
-    </div>
-    <div class="menu-item">
-        <span id="label-lang">Język</span>
-        <button class="mini-toggle" onclick="toggleLang()" id="lang-btn">PL</button>
-    </div>
-    <div class="menu-item">
-        <span id="label-theme">Motyw</span>
-        <button class="mini-toggle" onclick="toggleTheme()">Zmień</button>
-    </div>
-    <hr style="opacity: 0.1; margin: 20px 0;">
-    <p style="font-size: 0.7rem; opacity: 0.5;">SkyCast Pro v1.2</p>
-    <p style="font-size: 0.7rem; opacity: 0.5;">GitHub: zhanzhack</p>
-</div>
+            <div class="menu-item">
+                <span id="label-unit">Jednostka temp.</span>
+                <button class="mini-toggle" onclick="toggleUnit()" id="unit-btn">°C</button>
+            </div>
+            <div class="menu-item">
+                <span id="label-lang">Język</span>
+                <button class="mini-toggle" onclick="toggleLang()" id="lang-btn">PL</button>
+            </div>
+            <div class="menu-item">
+                <span id="label-theme">Motyw</span>
+                <button class="mini-toggle" onclick="toggleTheme()">Zmień</button>
+            </div>
+            <hr style="opacity: 0.1; margin: 20px 0;">
+            <p style="font-size: 0.7rem; opacity: 0.5;">SkyCast Pro v1.2</p>
+            <p style="font-size: 0.7rem; opacity: 0.5;">GitHub: zhanzhack</p>
+        </div>
     </div>
     <div id="overlay" class="overlay" onclick="toggleMenu()"></div>
 
@@ -56,13 +56,13 @@
             </div>
 
             <div class="tabs">
-                <button class="tab active" onclick="updateView('today')">DZISIAJ</button>
-                <button class="tab" onclick="updateView('tomorrow')">JUTRO</button>
-                <button class="tab" onclick="updateView('14days')">14 DNI</button>
+                <button class="tab active" id="t-today" onclick="updateView('today')">DZISIAJ</button>
+                <button class="tab" id="t-tomorrow" onclick="updateView('tomorrow')">JUTRO</button>
+                <button class="tab" id="t-14days" onclick="updateView('14days')">14 DNI</button>
             </div>
 
             <div id="chart-section" class="content-block">
-                <p style="font-size: 0.8rem; margin-bottom: 10px; opacity: 0.7;">Temperatura godzinowa</p>
+                <p id="t-hourly" style="font-size: 0.8rem; margin-bottom: 10px; opacity: 0.7;">Temperatura godzinowa</p>
                 <div class="chart-container">
                     <canvas id="tempChart"></canvas>
                 </div>
@@ -73,10 +73,10 @@
             </div>
 
             <div class="stats-grid">
-                <div class="stat-box"><span>Wiatr</span><b id="wind">-- km/h</b></div>
-                <div class="stat-box"><span>Wilgotność</span><b id="humidity">--%</b></div>
-                <div class="stat-box"><span>Ciśnienie</span><b id="pressure">-- hPa</b></div>
-                <div class="stat-box"><span>Zachmurzenie</span><b id="clouds">--%</b></div>
+                <div class="stat-box"><span id="t-wind">Wiatr</span><b id="wind">-- km/h</b></div>
+                <div class="stat-box"><span id="t-hum">Wilgotność</span><b id="humidity">--%</b></div>
+                <div class="stat-box"><span id="t-pres">Ciśnienie</span><b id="pressure">-- hPa</b></div>
+                <div class="stat-box"><span id="t-clouds">Zachmurzenie</span><b id="clouds">--%</b></div>
             </div>
             
             <button id="share-btn" class="secondary-btn">📤 Udostępnij prognozę</button>
@@ -86,7 +86,7 @@
             <div class="search-box">
                 <input type="text" id="city-input" placeholder="Wpisz miasto...">
                 <button id="search-btn">Szukaj</button>
-                <button onclick="showPage('home')" class="back-link">← Powrót</button>
+                <button onclick="showPage('home')" class="back-link" id="t-back">← Powrót</button>
             </div>
         </section>
 
