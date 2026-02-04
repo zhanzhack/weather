@@ -2,7 +2,7 @@
 <html lang="pl">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SkyCast Pro PWA</title>
     <link rel="stylesheet" href="css/style.css">
     <link rel="manifest" href="manifest.json">
@@ -12,21 +12,17 @@
 <body>
     <div id="side-menu" class="side-menu">
         <div class="menu-header">
-            <h3 data-t="settings">Ustawienia</h3>
+            <h3>Ustawienia</h3>
             <button class="close-btn" onclick="toggleMenu()">✕</button>
         </div>
         <div class="menu-content">
             <div class="menu-item">
-                <span data-t="unit_label">Jednostka temp.</span>
-                <button class="mini-toggle" onclick="toggleUnit()" id="unit-btn">°C</button>
+                <span>Jednostka temp.</span>
+                <button class="mini-toggle">°C / °F</button>
             </div>
             <div class="menu-item">
-                <span data-t="lang_label">Język</span>
-                <button class="mini-toggle" onclick="toggleLang()" id="lang-btn">PL</button>
-            </div>
-            <div class="menu-item">
-                <span data-t="theme_label">Motyw</span>
-                <button class="mini-toggle" onclick="toggleTheme()" data-t="theme_btn">Zmień</button>
+                <span>Format czasu</span>
+                <button class="mini-toggle">24h</button>
             </div>
             <hr style="opacity: 0.1; margin: 20px 0;">
             <p style="font-size: 0.7rem; opacity: 0.5;">SkyCast Pro v1.2</p>
@@ -44,25 +40,25 @@
 
         <main id="home" class="page">
             <div class="current-weather">
-                <p id="date-now" data-t="today">Dzisiaj</p>
+                <p id="date-now">Dzisiaj</p>
                 <div class="main-temp-row">
                     <h1 id="temperature">--°</h1>
                     <div id="weather-icon-large" style="font-size: 4rem;">☁️</div>
                 </div>
                 <div class="weather-info">
-                    <p id="feels-like">--</p>
+                    <p id="feels-like">Odczuwalna --°</p>
                     <p id="weather-desc">Pobieranie...</p>
                 </div>
             </div>
 
             <div class="tabs">
-                <button class="tab active" onclick="updateView('today')" data-t="tab_today">DZISIAJ</button>
-                <button class="tab" onclick="updateView('tomorrow')" data-t="tab_tomorrow">JUTRO</button>
-                <button class="tab" onclick="updateView('14days')" data-t="tab_14days">14 DNI</button>
+                <button class="tab active" onclick="updateView('today')">DZISIAJ</button>
+                <button class="tab" onclick="updateView('tomorrow')">JUTRO</button>
+                <button class="tab" onclick="updateView('14days')">14 DNI</button>
             </div>
 
             <div id="chart-section" class="content-block">
-                <p style="font-size: 0.8rem; margin-bottom: 10px; opacity: 0.7;" data-t="chart_title">Temperatura godzinowa</p>
+                <p style="font-size: 0.8rem; margin-bottom: 10px; opacity: 0.7;">Temperatura godzinowa</p>
                 <div class="chart-container">
                     <canvas id="tempChart"></canvas>
                 </div>
@@ -73,26 +69,26 @@
             </div>
 
             <div class="stats-grid">
-                <div class="stat-box"><span data-t="wind">Wiatr</span><b id="wind">--</b></div>
-                <div class="stat-box"><span data-t="hum">Wilgotność</span><b id="humidity">--</b></div>
-                <div class="stat-box"><span data-t="pres">Ciśnienie</span><b id="pressure">--</b></div>
-                <div class="stat-box"><span data-t="clouds">Zachmurzenie</span><b id="clouds">--</b></div>
+                <div class="stat-box"><span>Wiatr</span><b id="wind">-- km/h</b></div>
+                <div class="stat-box"><span>Wilgotność</span><b id="humidity">--%</b></div>
+                <div class="stat-box"><span>Ciśnienie</span><b id="pressure">-- hPa</b></div>
+                <div class="stat-box"><span>Zachmurzenie</span><b id="clouds">--%</b></div>
             </div>
             
-            <button id="share-btn" class="secondary-btn" data-t="share">📤 Udostępnij prognozę</button>
+            <button id="share-btn" class="secondary-btn">📤 Udostępnij prognozę</button>
         </main>
 
         <section id="search" class="page" style="display:none;">
             <div class="search-box">
                 <input type="text" id="city-input" placeholder="Wpisz miasto...">
-                <button id="search-btn" data-t="search">Szukaj</button>
-                <button onclick="showPage('home')" class="back-link" data-t="back">← Powrót</button>
+                <button id="search-btn">Szukaj</button>
+                <button onclick="showPage('home')" class="back-link">← Powrót</button>
             </div>
         </section>
 
         <nav class="bottom-nav">
-            <button onclick="showPage('home')" class="nav-item active">🏠<span data-t="nav_home">Home</span></button>
-            <button onclick="showPage('search')" class="nav-item">🔍<span data-t="nav_search">Szukaj</span></button>
+            <button onclick="showPage('home')" class="nav-item active">🏠<span>Home</span></button>
+            <button onclick="showPage('search')" class="nav-item">🔍<span>Szukaj</span></button>
             <button id="geo-btn" class="nav-item">📍<span>GPS</span></button>
         </nav>
     </div>
