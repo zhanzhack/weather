@@ -38,11 +38,17 @@ async function getWeather(city) {
 
 function updateUI(data) {
     document.getElementById('city-name').innerText = data.name;
-    document.getElementById('temperature').innerText = Math.round(data.main.temp) + "°C";
+    document.getElementById('temperature').innerText = Math.round(data.main.temp) + "°";
     document.getElementById('weather-desc').innerText = data.weather[0].description;
+    
+    // Додаємо нові дані
+    document.getElementById('humidity').innerText = data.main.humidity + "%";
+    document.getElementById('wind').innerText = data.wind.speed + " m/s";
+    
+    // Оновлюємо стилі кнопок в меню
+    updateNav(activePage);
     showPage('home');
 }
-
 async function getMyLocation() {
     if (!navigator.geolocation) {
         return alert("Geolokalizacja nie jest wspierana przez Twoją przeglądarkę");

@@ -1,45 +1,47 @@
-<!DOCTYPE html>
-<html lang="pl">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SkyCast PWA - Pogoda</title>
-    <link rel="stylesheet" href="css/style.css">
-    <link rel="manifest" href="manifest.json">
-    <meta name="theme-color" content="#4facfe">
-</head>
 <body>
+    <main id="app">
+        <section id="home" class="page">
+            <h2 id="city-name">Warszawa</h2>
+            <p id="weather-desc">Czyste niebo</p>
+            
+            <h1 id="temperature">22°C</h1>
+
+            <div class="details-grid">
+                <div class="detail-card">
+                    <span style="font-size: 0.8rem; color: #94a3b8;">Wilgotność</span>
+                    <span id="humidity" style="font-size: 1.2rem;">--%</span>
+                </div>
+                <div class="detail-card">
+                    <span style="font-size: 0.8rem; color: #94a3b8;">Wiatr</span>
+                    <span id="wind" style="font-size: 1.2rem;">-- m/s</span>
+                </div>
+            </div>
+
+            <button id="share-btn" style="margin-top: 40px; background: rgba(255,255,255,0.1); color: white;">📤 Udostępnij</button>
+            <p id="offline-msg" style="display:none; color: #fb7185; margin-top: 20px;">Jesteś offline</p>
+        </section>
+
+        <section id="search" class="page" style="display: none;">
+            <h2 style="margin-bottom: 20px;">Szukaj miasta</h2>
+            <input type="text" id="city-input" placeholder="Np. Wrocław, Londyn...">
+            <button id="search-btn">Pobierz pogodę</button>
+        </section>
+
+        <section id="about" class="page" style="display: none;">
+            <h2 style="margin-bottom: 20px;">Ustawienia</h2>
+            <button id="geo-btn">📍 Moja lokalizacja</button>
+            <div style="margin-top: 40px; color: #94a3b8; font-size: 0.9rem;">
+                <p>SkyCast v2.0</p>
+                <p>Wykonano profesjonalnie dla PAM</p>
+            </div>
+        </section>
+    </main>
 
     <nav>
-        <button onclick="showPage('home')">Strona Główna</button>
-        <button onclick="showPage('search')">Szukaj</button>
-        <button onclick="showPage('about')">O aplikacji</button>
+        <button onclick="showPage('home')" id="nav-home" class="active">🏠<span>Home</span></button>
+        <button onclick="showPage('search')" id="nav-search">🔍<span>Szukaj</span></button>
+        <button onclick="showPage('about')" id="nav-about">⚙️<span>Info</span></button>
     </nav>
-
-    <div id="home" class="page">
-        <h2 id="city-name">Lokalizacja...</h2> 
-        <h1 id="temperature">--°C</h1>
-        <p id="weather-desc">Pobieranie danych...</p>
-        <button id="share-btn">📤 Udostępnij pogodę</button>
-        
-        <p id="offline-msg" style="display:none; color: #ffcccc; margin-top:10px;">Tryb offline: Dane mogą być nieaktualne</p>
-    </div>
-
-    <div id="search" class="page" style="display: none;">
-        <h1>Znajdź miasto</h1>
-        <input type="text" id="city-input" placeholder="Wpisz nazwę miasta...">
-        <button id="search-btn">Szukaj</button>
-    </div>
-
-    <div id="about" class="page" style="display: none;">
-        <h1>Ustawienia i Info</h1>
-        <p>Projekt: Progresywna Aplikacja Mobilna</p>
-        <button id="geo-btn">📍 Moja lokalizacja</button>
-        <div style="margin-top: 20px; font-size: 0.8rem;">
-            <p>Technologie: HTML, CSS, JS, PWA</p>
-        </div>
-    </div>
 
     <script src="js/app.js"></script>
 </body>
-</html>
