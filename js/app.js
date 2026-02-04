@@ -1,11 +1,12 @@
 let myChart = null;
 let weatherData = null;
 
-// ФУНКЦІЯ МЕНЮ
+
 function toggleMenu() {
     document.getElementById('side-menu').classList.toggle('active');
     document.getElementById('overlay').classList.toggle('active');
 }
+
 
 function showPage(pageId) {
     document.querySelectorAll('.page').forEach(p => p.style.display = 'none');
@@ -14,15 +15,22 @@ function showPage(pageId) {
     if (document.getElementById('side-menu').classList.contains('active')) toggleMenu();
 }
 
+
 async function getWeatherData(lat, lon, cityName = "Moja lokalizacja") {
     try {
         const url = `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current=temperature_2m,relative_humidity_2m,apparent_temperature,weather_code,pressure_msl,wind_speed_10m,cloud_cover&hourly=temperature_2m&daily=weather_code,temperature_2m_max,temperature_2m_min&timezone=auto`;
         const resp = await fetch(url);
+        if (!resp.ok) throw new Error();
+        
         weatherData = await resp.json();
         weatherData.cityName = cityName;
+        
+        
+        localStorage.setItem('lastWeatherData', JSON.stringify(weatherData));
+        
         updateUI('today');
     } catch (err) {
-        alert("Błąd pobierania danych");
+        console.warn("Tryb offline: Dane załadowane z pamięci.");
     }
 }
 
@@ -117,6 +125,7 @@ function getWeatherEmoji(code) {
     return "☁️";
 }
 
+
 document.getElementById('search-btn').addEventListener('click', async () => {
     const city = document.getElementById('city-input').value;
     if(!city) return;
@@ -133,4 +142,42 @@ document.getElementById('geo-btn').addEventListener('click', () => {
     navigator.geolocation.getCurrentPosition(pos => getWeatherData(pos.coords.latitude, pos.coords.longitude));
 });
 
-window.onload = () => getWeatherData(52.23, 21.01, "Warszawa");
+
+document.getElementById('share-btn').addEventListener('click', async () => {
+    const shareData = {
+        title: 'SkyCast Pro',
+        text: `Aktualna pogoda w ${weatherData.cityName}: ${Math.round(weatherData.current.temperature_2m)}°C. Sprawdź moją aplikację!`,
+        url: window.location.href
+    };
+
+    try {
+        if (navigator.share) {
+            await navigator.share(shareData);
+        } else {
+            alert("Udostępnianie nie jest wspierane w tej przeglądarce. Skopiuj link: " + window.location.href);
+        }
+    } catch (err) {
+        console.log("Błąd udostępniania:", err);
+    }
+});
+
+
+window.addEventListener('offline', () => {
+    document.getElementById('weather-desc').innerHTML = "<span style='color: #ffcc00;'>⚠️ Tryb Offline (Dane z pamięci)</span>";
+    document.body.style.filter = "grayscale(0.3)";
+});
+
+window.addEventListener('online', () => {
+    document.getElementById('weather-desc').innerHTML = "Z powrotem online";
+    document.body.style.filter = "none";
+    getWeatherData(52.23, 21.01, weatherData ? weatherData.cityName : "Warszawa");
+});
+
+window.onload = () => {
+    const saved = localStorage.getItem('lastWeatherData');
+    if (saved) {
+        weatherData = JSON.parse(saved);
+        updateUI('today');
+    }
+    getWeatherData(52.23, 21.01, "Warszawa");
+};
