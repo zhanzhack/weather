@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SkyCast PWA - Pogoda</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#4facfe">
+</head>
+<body>
+
+    <nav>
+        <button onclick="showPage('home')">Strona Główna</button>
+        <button onclick="showPage('search')">Szukaj</button>
+        <button onclick="showPage('about')">O aplikacji</button>
+    </nav>
+
+    <div id="home" class="page">
+        <h2 id="city-name">Lokalizacja...</h2> 
+        <h1 id="temperature">--°C</h1>
+        <p id="weather-desc">Pobieranie danych...</p>
+        <button id="share-btn">📤 Udostępnij pogodę</button>
+        
+        <p id="offline-msg" style="display:none; color: #ffcccc; margin-top:10px;">Tryb offline: Dane mogą być nieaktualne</p>
+    </div>
+
+    <div id="search" class="page" style="display: none;">
+        <h1>Znajdź miasto</h1>
+        <input type="text" id="city-input" placeholder="Wpisz nazwę miasta...">
+        <button id="search-btn">Szukaj</button>
+    </div>
+
+    <div id="about" class="page" style="display: none;">
+        <h1>Ustawienia i Info</h1>
+        <p>Projekt: Progresywna Aplikacja Mobilna</p>
+        <button id="geo-btn">📍 Moja lokalizacja</button>
+        <div style="margin-top: 20px; font-size: 0.8rem;">
+            <p>Technologie: HTML, CSS, JS, PWA</p>
+        </div>
+    </div>
+
+    <script src="js/app.js"></script>
+</body>
+</html>

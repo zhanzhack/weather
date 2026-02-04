@@ -1,0 +1,16 @@
+{
+  "name": "SkyCast Weather Professional",
+  "short_name": "SkyCast",
+  "start_url": "index.html",
+  "display": "standalone",
+  "background_color": "#4facfe",
+  "theme_color": "#4facfe",
+  "orientation": "portrait",
+  "icons": [
+    {
+      "src": "https://cdn-icons-png.flaticon.com/512/252/252035.png",
+      "type": "image/png",
+      "sizes": "512x512"
+    }
+  ]
+}
