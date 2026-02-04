@@ -13,7 +13,7 @@
     <div class="app-container">
         <header class="header">
             <button class="icon-btn">☰</button>
-            <h2 id="city-name">Ładowanie...</h2>
+            <h2 id="city-name">Lokalizacja...</h2>
             <button class="icon-btn" onclick="showPage('search')">🔍</button>
         </header>
 
@@ -22,44 +22,36 @@
                 <p id="date-now">Dzisiaj</p>
                 <div class="main-temp-row">
                     <h1 id="temperature">--°</h1>
-                    <img id="main-icon" src="https://openweathermap.org/img/wn/01d@4x.png" alt="icon">
+                    <div id="weather-icon-large" style="font-size: 4rem;">☁️</div>
                 </div>
                 <div class="weather-info">
                     <p id="feels-like">Odczuwalna --°</p>
-                    <p id="weather-desc">Pobieranie danych...</p>
+                    <p id="weather-desc">Pobieranie...</p>
                 </div>
             </div>
 
             <div class="tabs">
-                <button class="tab active">DZISIAJ</button>
-                <button class="tab" onclick="alert('Funkcja dostępna wkrótce')">JUTRO</button>
-                <button class="tab" onclick="alert('Wymaga płatnego API')">14 DNI</button>
+                <button class="tab active" onclick="updateView('today')">DZISIAJ</button>
+                <button class="tab" onclick="updateView('tomorrow')">JUTRO</button>
+                <button class="tab" onclick="updateView('14days')">14 DNI</button>
             </div>
 
-            <div class="chart-section">
-                <p style="font-size: 0.8rem; margin-bottom: 10px; opacity: 0.7;">Temperatura w najbliższych godzinach</p>
+            <div id="chart-section" class="content-block">
+                <p style="font-size: 0.8rem; margin-bottom: 10px; opacity: 0.7;">Temperatura godzinowa</p>
                 <div class="chart-container">
                     <canvas id="tempChart"></canvas>
                 </div>
             </div>
 
+            <div id="forecast-section" class="content-block" style="display: none;">
+                <div id="daily-list" class="forecast-list"></div>
+            </div>
+
             <div class="stats-grid">
-                <div class="stat-box">
-                    <span>Wiatr</span>
-                    <b id="wind">-- km/h</b>
-                </div>
-                <div class="stat-box">
-                    <span>Wilgotność</span>
-                    <b id="humidity">--%</b>
-                </div>
-                <div class="stat-box">
-                    <span>Ciśnienie</span>
-                    <b id="pressure">-- hPa</b>
-                </div>
-                <div class="stat-box">
-                    <span>Zachmurzenie</span>
-                    <b id="clouds">--%</b>
-                </div>
+                <div class="stat-box"><span>Wiatr</span><b id="wind">-- km/h</b></div>
+                <div class="stat-box"><span>Wilgotność</span><b id="humidity">--%</b></div>
+                <div class="stat-box"><span>Ciśnienie</span><b id="pressure">-- hPa</b></div>
+                <div class="stat-box"><span>Zachmurzenie</span><b id="clouds">--%</b></div>
             </div>
             
             <button id="share-btn" class="secondary-btn">📤 Udostępnij prognozę</button>
@@ -67,7 +59,7 @@
 
         <section id="search" class="page" style="display:none;">
             <div class="search-box">
-                <input type="text" id="city-input" placeholder="Wpisz miasto (np. Warszawa)...">
+                <input type="text" id="city-input" placeholder="Wpisz miasto...">
                 <button id="search-btn">Szukaj</button>
                 <button onclick="showPage('home')" class="back-link">← Powrót</button>
             </div>
@@ -76,10 +68,9 @@
         <nav class="bottom-nav">
             <button onclick="showPage('home')" class="nav-item active">🏠<span>Home</span></button>
             <button onclick="showPage('search')" class="nav-item">🔍<span>Szukaj</span></button>
-            <button id="geo-btn" class="nav-item">📍<span>Lokalizacja</span></button>
+            <button id="geo-btn" class="nav-item">📍<span>GPS</span></button>
         </nav>
     </div>
-
     <script src="js/app.js"></script>
 </body>
 </html>

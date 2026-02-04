@@ -15,92 +15,46 @@ body {
     justify-content: center;
 }
 
-.app-container {
-    width: 100%;
-    max-width: 450px;
-    padding: 20px 20px 100px 20px;
-}
+.app-container { width: 100%; max-width: 450px; padding: 20px 20px 100px 20px; }
 
-.header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 20px;
-}
+.header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
 
 .icon-btn { background: none; border: none; color: white; font-size: 1.5rem; cursor: pointer; }
 
-.main-temp-row {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 10px;
-    margin: 10px 0;
-}
+#temperature { font-size: 6rem; font-weight: 300; text-align: center; }
 
-#temperature { font-size: 6rem; font-weight: 300; }
-#main-icon { width: 100px; height: 100px; }
+.main-temp-row { display: flex; align-items: center; justify-content: center; gap: 15px; margin: 10px 0; }
 
 .weather-info { text-align: center; margin-bottom: 30px; }
-.weather-info p { opacity: 0.8; margin: 5px 0; }
 
-.tabs {
-    display: flex;
-    justify-content: space-around;
-    margin-bottom: 20px;
-    border-bottom: 1px solid rgba(255,255,255,0.1);
-}
+.tabs { display: flex; justify-content: space-around; margin-bottom: 20px; border-bottom: 1px solid rgba(255,255,255,0.1); }
 
-.tab {
-    background: none; border: none; color: rgba(255,255,255,0.5);
-    padding: 10px; font-weight: 600; cursor: pointer; font-size: 0.8rem;
-}
+.tab { background: none; border: none; color: rgba(255,255,255,0.5); padding: 10px; font-weight: 600; cursor: pointer; font-size: 0.8rem; transition: 0.3s; }
 
 .tab.active { color: white; border-bottom: 2px solid white; }
 
-.chart-section {
-    background: var(--card);
-    border-radius: 20px;
-    padding: 15px;
-    margin-bottom: 20px;
-}
+.content-block { background: var(--card); border-radius: 20px; padding: 15px; margin-bottom: 20px; min-height: 210px; }
 
 .chart-container { height: 180px; width: 100%; }
 
-.stats-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 12px;
-}
+.stats-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
 
-.stat-box {
-    background: var(--card);
-    padding: 15px;
-    border-radius: 15px;
-    display: flex;
-    flex-direction: column;
-}
+.stat-box { background: var(--card); padding: 15px; border-radius: 15px; display: flex; flex-direction: column; }
 
 .stat-box span { font-size: 0.75rem; color: #a0aec0; margin-bottom: 5px; }
-.stat-box b { font-size: 1.1rem; }
 
-.bottom-nav {
-    position: fixed;
-    bottom: 0; left: 50%;
-    transform: translateX(-50%);
-    width: 100%; max-width: 450px;
-    background: rgba(26, 58, 61, 0.95);
-    backdrop-filter: blur(10px);
-    display: flex; justify-content: space-around;
-    padding: 15px 0;
-    border-top: 1px solid rgba(255,255,255,0.1);
-}
+.forecast-item { display: flex; justify-content: space-between; align-items: center; padding: 10px 0; border-bottom: 1px solid rgba(255,255,255,0.05); }
+
+.bottom-nav { position: fixed; bottom: 0; left: 50%; transform: translateX(-50%); width: 100%; max-width: 450px; background: rgba(26, 58, 61, 0.95); backdrop-filter: blur(10px); display: flex; justify-content: space-around; padding: 15px 0; border-top: 1px solid rgba(255,255,255,0.1); }
 
 .nav-item { background: none; border: none; color: #718096; display: flex; flex-direction: column; align-items: center; font-size: 0.7rem; cursor: pointer; }
-.nav-item.active { color: white; }
-.nav-item span { margin-top: 4px; }
 
-input { width: 100%; padding: 15px; border-radius: 12px; border: none; background: var(--card); color: white; margin-bottom: 10px; }
-#search-btn { width: 100%; padding: 15px; border-radius: 12px; border: none; background: white; color: var(--bg); font-weight: 600; cursor: pointer; }
-.back-link { background: none; border: none; color: white; margin-top: 20px; cursor: pointer; opacity: 0.7; }
+.nav-item.active { color: white; }
+
+input { width: 100%; padding: 15px; border-radius: 12px; border: none; background: var(--card); color: white; margin-bottom: 10px; outline: none; }
+
+#search-btn { width: 100%; padding: 15px; border-radius: 12px; border: none; background: #4fd1c5; color: #1a3a3d; font-weight: 600; cursor: pointer; }
+
 .secondary-btn { width: 100%; background: none; border: 1px solid rgba(255,255,255,0.2); color: white; padding: 12px; border-radius: 12px; margin-top: 20px; cursor: pointer; }
+
+.back-link { background: none; border: none; color: white; margin-top: 20px; cursor: pointer; opacity: 0.7; }
