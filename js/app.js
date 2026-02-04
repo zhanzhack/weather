@@ -1,3 +1,10 @@
+let currentUnit = 'C'; 
+let currentLang = 'PL';
+
+const translations = {
+    PL: { unit: "Jednostka temp.", lang: "Język", theme: "Motyw", feels: "Odczuwalna", wind: "Wiatr", hum: "Wilgotność", pres: "Ciśnienie", clouds: "Zachmurzenie" },
+    EN: { unit: "Temp. Unit", lang: "Language", theme: "Theme", feels: "Feels like", wind: "Wind", hum: "Humidity", pres: "Pressure", clouds: "Clouds" }
+};
 let myChart = null;
 let weatherData = null;
 
@@ -5,6 +12,31 @@ let weatherData = null;
 function toggleMenu() {
     document.getElementById('side-menu').classList.toggle('active');
     document.getElementById('overlay').classList.toggle('active');
+}
+function toggleUnit() {
+    currentUnit = currentUnit === 'C' ? 'F' : 'C';
+    document.getElementById('unit-btn').innerText = `°${currentUnit}`;
+    updateUI('today');
+}
+
+function toggleLang() {
+    currentLang = currentLang === 'PL' ? 'EN' : 'PL';
+    document.getElementById('lang-btn').innerText = currentLang;
+    // Оновлюємо тексти в меню
+    document.getElementById('label-unit').innerText = translations[currentLang].unit;
+    document.getElementById('label-lang').innerText = translations[currentLang].lang;
+    document.getElementById('label-theme').innerText = translations[currentLang].theme;
+    updateUI('today');
+}
+
+function toggleTheme() {
+    document.body.classList.toggle('alt-theme');
+}
+
+// Математика для конвертації
+function convertTemp(temp) {
+    if (currentUnit === 'F') return Math.round((temp * 9/5) + 32);
+    return Math.round(temp);
 }
 
 // Перемикання сторінок
@@ -39,9 +71,12 @@ function updateUI(mode) {
     document.getElementById('city-name').innerText = weatherData.cityName;
     
     const current = weatherData.current;
-    document.getElementById('temperature').innerText = Math.round(current.temperature_2m) + "°";
+    
+    // Оновлено з урахуванням одиниць та мови
+    document.getElementById('temperature').innerText = convertTemp(current.temperature_2m) + "°";
+    document.getElementById('feels-like').innerText = `${translations[currentLang].feels} ${convertTemp(current.apparent_temperature)}°`;
+    
     document.getElementById('weather-desc').innerText = getWeatherDesc(current.weather_code);
-    document.getElementById('feels-like').innerText = `Odczuwalna ${Math.round(current.apparent_temperature)}°`;
     document.getElementById('humidity').innerText = current.relative_humidity_2m + "%";
     document.getElementById('wind').innerText = Math.round(current.wind_speed_10m) + " km/h";
     document.getElementById('pressure').innerText = Math.round(current.pressure_msl) + " hPa";
