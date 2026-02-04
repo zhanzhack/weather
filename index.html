@@ -10,9 +10,30 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
+    <div id="side-menu" class="side-menu">
+        <div class="menu-header">
+            <h3>Ustawienia</h3>
+            <button class="close-btn" onclick="toggleMenu()">✕</button>
+        </div>
+        <div class="menu-content">
+            <div class="menu-item">
+                <span>Jednostka temp.</span>
+                <button class="mini-toggle">°C / °F</button>
+            </div>
+            <div class="menu-item">
+                <span>Format czasu</span>
+                <button class="mini-toggle">24h</button>
+            </div>
+            <hr style="opacity: 0.1; margin: 20px 0;">
+            <p style="font-size: 0.7rem; opacity: 0.5;">SkyCast Pro v1.2</p>
+            <p style="font-size: 0.7rem; opacity: 0.5;">GitHub: zhanzhack</p>
+        </div>
+    </div>
+    <div id="overlay" class="overlay" onclick="toggleMenu()"></div>
+
     <div class="app-container">
         <header class="header">
-            <button class="icon-btn">☰</button>
+            <button class="icon-btn" onclick="toggleMenu()">☰</button>
             <h2 id="city-name">Lokalizacja...</h2>
             <button class="icon-btn" onclick="showPage('search')">🔍</button>
         </header>
