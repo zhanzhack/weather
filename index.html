@@ -1,47 +1,85 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SkyCast Pro PWA</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="manifest" href="manifest.json">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
 <body>
-    <main id="app">
-        <section id="home" class="page">
-            <h2 id="city-name">Warszawa</h2>
-            <p id="weather-desc">Czyste niebo</p>
+    <div class="app-container">
+        <header class="header">
+            <button class="icon-btn">☰</button>
+            <h2 id="city-name">Ładowanie...</h2>
+            <button class="icon-btn" onclick="showPage('search')">🔍</button>
+        </header>
+
+        <main id="home" class="page">
+            <div class="current-weather">
+                <p id="date-now">Dzisiaj</p>
+                <div class="main-temp-row">
+                    <h1 id="temperature">--°</h1>
+                    <img id="main-icon" src="https://openweathermap.org/img/wn/01d@4x.png" alt="icon">
+                </div>
+                <div class="weather-info">
+                    <p id="feels-like">Odczuwalna --°</p>
+                    <p id="weather-desc">Pobieranie danych...</p>
+                </div>
+            </div>
+
+            <div class="tabs">
+                <button class="tab active">DZISIAJ</button>
+                <button class="tab" onclick="alert('Funkcja dostępna wkrótce')">JUTRO</button>
+                <button class="tab" onclick="alert('Wymaga płatnego API')">14 DNI</button>
+            </div>
+
+            <div class="chart-section">
+                <p style="font-size: 0.8rem; margin-bottom: 10px; opacity: 0.7;">Temperatura w najbliższych godzinach</p>
+                <div class="chart-container">
+                    <canvas id="tempChart"></canvas>
+                </div>
+            </div>
+
+            <div class="stats-grid">
+                <div class="stat-box">
+                    <span>Wiatr</span>
+                    <b id="wind">-- km/h</b>
+                </div>
+                <div class="stat-box">
+                    <span>Wilgotność</span>
+                    <b id="humidity">--%</b>
+                </div>
+                <div class="stat-box">
+                    <span>Ciśnienie</span>
+                    <b id="pressure">-- hPa</b>
+                </div>
+                <div class="stat-box">
+                    <span>Zachmurzenie</span>
+                    <b id="clouds">--%</b>
+                </div>
+            </div>
             
-            <h1 id="temperature">22°C</h1>
+            <button id="share-btn" class="secondary-btn">📤 Udostępnij prognozę</button>
+        </main>
 
-            <div class="details-grid">
-                <div class="detail-card">
-                    <span style="font-size: 0.8rem; color: #94a3b8;">Wilgotność</span>
-                    <span id="humidity" style="font-size: 1.2rem;">--%</span>
-                </div>
-                <div class="detail-card">
-                    <span style="font-size: 0.8rem; color: #94a3b8;">Wiatr</span>
-                    <span id="wind" style="font-size: 1.2rem;">-- m/s</span>
-                </div>
-            </div>
-
-            <button id="share-btn" style="margin-top: 40px; background: rgba(255,255,255,0.1); color: white;">📤 Udostępnij</button>
-            <p id="offline-msg" style="display:none; color: #fb7185; margin-top: 20px;">Jesteś offline</p>
-        </section>
-
-        <section id="search" class="page" style="display: none;">
-            <h2 style="margin-bottom: 20px;">Szukaj miasta</h2>
-            <input type="text" id="city-input" placeholder="Np. Wrocław, Londyn...">
-            <button id="search-btn">Pobierz pogodę</button>
-        </section>
-
-        <section id="about" class="page" style="display: none;">
-            <h2 style="margin-bottom: 20px;">Ustawienia</h2>
-            <button id="geo-btn">📍 Moja lokalizacja</button>
-            <div style="margin-top: 40px; color: #94a3b8; font-size: 0.9rem;">
-                <p>SkyCast v2.0</p>
-                <p>Wykonano profesjonalnie dla PAM</p>
+        <section id="search" class="page" style="display:none;">
+            <div class="search-box">
+                <input type="text" id="city-input" placeholder="Wpisz miasto (np. Warszawa)...">
+                <button id="search-btn">Szukaj</button>
+                <button onclick="showPage('home')" class="back-link">← Powrót</button>
             </div>
         </section>
-    </main>
 
-    <nav>
-        <button onclick="showPage('home')" id="nav-home" class="active">🏠<span>Home</span></button>
-        <button onclick="showPage('search')" id="nav-search">🔍<span>Szukaj</span></button>
-        <button onclick="showPage('about')" id="nav-about">⚙️<span>Info</span></button>
-    </nav>
+        <nav class="bottom-nav">
+            <button onclick="showPage('home')" class="nav-item active">🏠<span>Home</span></button>
+            <button onclick="showPage('search')" class="nav-item">🔍<span>Szukaj</span></button>
+            <button id="geo-btn" class="nav-item">📍<span>Lokalizacja</span></button>
+        </nav>
+    </div>
 
     <script src="js/app.js"></script>
 </body>
+</html>

@@ -1,126 +1,106 @@
 :root {
-    --glass: rgba(255, 255, 255, 0.1);
-    --glass-border: rgba(255, 255, 255, 0.2);
-    --text: #ffffff;
+    --bg: #1a3a3d;
+    --card: rgba(255, 255, 255, 0.08);
+    --accent: #4fd1c5;
 }
 
-* {
-    margin: 0; 
-    padding: 0; 
-    box-sizing: border-box;
-    font-family: 'Poppins', sans-serif;
-}
+* { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; }
 
 body {
-    background: #0f172a; /* Глибокий темно-синій */
-    background: linear-gradient(180deg, #0f172a 0%, #1e293b 100%);
+    background: #2c5358;
+    background: linear-gradient(180deg, #2c5358 0%, #1a3a3d 100%);
+    color: white;
     min-height: 100vh;
-    color: var(--text);
     display: flex;
-    flex-direction: column;
-    align-items: center;
+    justify-content: center;
 }
 
-/* Навігація в стилі iOS Tab Bar (знизу) */
-nav {
-    position: fixed;
-    bottom: 20px;
-    width: 90%;
-    max-width: 400px;
-    background: rgba(30, 41, 59, 0.7);
-    backdrop-filter: blur(20px);
-    border: 1px solid var(--glass-border);
-    border-radius: 25px;
+.app-container {
+    width: 100%;
+    max-width: 450px;
+    padding: 20px 20px 100px 20px;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.icon-btn { background: none; border: none; color: white; font-size: 1.5rem; cursor: pointer; }
+
+.main-temp-row {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    margin: 10px 0;
+}
+
+#temperature { font-size: 6rem; font-weight: 300; }
+#main-icon { width: 100px; height: 100px; }
+
+.weather-info { text-align: center; margin-bottom: 30px; }
+.weather-info p { opacity: 0.8; margin: 5px 0; }
+
+.tabs {
     display: flex;
     justify-content: space-around;
-    padding: 12px;
-    z-index: 1000;
+    margin-bottom: 20px;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
 }
 
-nav button {
-    background: none;
-    border: none;
-    color: #94a3b8;
-    font-size: 0.8rem;
-    cursor: pointer;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    transition: 0.3s;
+.tab {
+    background: none; border: none; color: rgba(255,255,255,0.5);
+    padding: 10px; font-weight: 600; cursor: pointer; font-size: 0.8rem;
 }
 
-nav button.active {
-    color: #38bdf8;
+.tab.active { color: white; border-bottom: 2px solid white; }
+
+.chart-section {
+    background: var(--card);
+    border-radius: 20px;
+    padding: 15px;
+    margin-bottom: 20px;
 }
 
-/* Головна картка */
-.page {
-    width: 90%;
-    max-width: 450px;
-    margin-top: 60px;
-    padding: 40px 20px;
-    text-align: center;
-}
+.chart-container { height: 180px; width: 100%; }
 
-#temperature {
-    font-size: 7rem;
-    font-weight: 200; /* Тонкий шрифт як в Apple Weather */
-    margin: 10px 0;
-    background: linear-gradient(to bottom, #fff, #94a3b8);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-}
-
-#city-name {
-    font-size: 2rem;
-    font-weight: 500;
-}
-
-#weather-desc {
-    font-size: 1.2rem;
-    text-transform: capitalize;
-    color: #38bdf8;
-    margin-bottom: 30px;
-}
-
-/* Красиві картки додаткової інфи */
-.details-grid {
+.stats-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 15px;
-    margin-top: 30px;
+    gap: 12px;
 }
 
-.detail-card {
-    background: var(--glass);
-    border: 1px solid var(--glass-border);
+.stat-box {
+    background: var(--card);
     padding: 15px;
-    border-radius: 20px;
+    border-radius: 15px;
     display: flex;
     flex-direction: column;
-    gap: 5px;
 }
 
-/* Поля вводу */
-input {
-    width: 100%;
-    background: var(--glass);
-    border: 1px solid var(--glass-border);
-    padding: 15px;
-    border-radius: 15px;
-    color: white;
-    font-size: 1rem;
-    margin-bottom: 10px;
+.stat-box span { font-size: 0.75rem; color: #a0aec0; margin-bottom: 5px; }
+.stat-box b { font-size: 1.1rem; }
+
+.bottom-nav {
+    position: fixed;
+    bottom: 0; left: 50%;
+    transform: translateX(-50%);
+    width: 100%; max-width: 450px;
+    background: rgba(26, 58, 61, 0.95);
+    backdrop-filter: blur(10px);
+    display: flex; justify-content: space-around;
+    padding: 15px 0;
+    border-top: 1px solid rgba(255,255,255,0.1);
 }
 
-button#search-btn, #share-btn, #geo-btn {
-    background: #38bdf8;
-    color: #0f172a;
-    font-weight: 600;
-    border: none;
-    padding: 15px;
-    border-radius: 15px;
-    width: 100%;
-    cursor: pointer;
-    margin-top: 10px;
-}
+.nav-item { background: none; border: none; color: #718096; display: flex; flex-direction: column; align-items: center; font-size: 0.7rem; cursor: pointer; }
+.nav-item.active { color: white; }
+.nav-item span { margin-top: 4px; }
+
+input { width: 100%; padding: 15px; border-radius: 12px; border: none; background: var(--card); color: white; margin-bottom: 10px; }
+#search-btn { width: 100%; padding: 15px; border-radius: 12px; border: none; background: white; color: var(--bg); font-weight: 600; cursor: pointer; }
+.back-link { background: none; border: none; color: white; margin-top: 20px; cursor: pointer; opacity: 0.7; }
+.secondary-btn { width: 100%; background: none; border: 1px solid rgba(255,255,255,0.2); color: white; padding: 12px; border-radius: 12px; margin-top: 20px; cursor: pointer; }
