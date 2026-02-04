@@ -20,7 +20,7 @@ const translations = {
 let myChart = null;
 let weatherData = null;
 
-// Функція меню
+
 function toggleMenu() {
     document.getElementById('side-menu').classList.toggle('active');
     document.getElementById('overlay').classList.toggle('active');
@@ -37,7 +37,7 @@ function toggleLang() {
 
     const t = translations[currentLang];
 
-    // Масовий переклад елементів за ID
+   
     document.getElementById('t-settings').innerText = t.settings;
     document.getElementById('label-unit').innerText = t.unit;
     document.getElementById('label-lang').innerText = t.lang;
@@ -53,7 +53,7 @@ function toggleLang() {
     document.getElementById('t-clouds').innerText = t.clouds;
     document.getElementById('share-btn').innerText = t.share;
 
-    // Перемальовуємо дані (для "Feels like" та графіку)
+    
     updateUI('today');
 }
 
@@ -61,13 +61,13 @@ function toggleTheme() {
     document.body.classList.toggle('alt-theme');
 }
 
-// Математика для конвертації
+
 function convertTemp(temp) {
     if (currentUnit === 'F') return Math.round((temp * 9/5) + 32);
     return Math.round(temp);
 }
 
-// Перемикання сторінок
+
 function showPage(pageId) {
     document.querySelectorAll('.page').forEach(p => p.style.display = 'none');
     document.getElementById(pageId).style.display = 'block';
@@ -75,7 +75,7 @@ function showPage(pageId) {
     if (document.getElementById('side-menu').classList.contains('active')) toggleMenu();
 }
 
-// Отримання даних
+
 async function getWeatherData(lat, lon, cityName = "Moja lokalizacja") {
     try {
         const url = `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current=temperature_2m,relative_humidity_2m,apparent_temperature,weather_code,pressure_msl,wind_speed_10m,cloud_cover&hourly=temperature_2m&daily=weather_code,temperature_2m_max,temperature_2m_min&timezone=auto`;
@@ -85,7 +85,7 @@ async function getWeatherData(lat, lon, cityName = "Moja lokalizacja") {
         weatherData = await resp.json();
         weatherData.cityName = cityName;
         
-        // Зберігаємо в LocalStorage для офлайну
+        
         localStorage.setItem('lastWeatherData', JSON.stringify(weatherData));
         
         updateUI('today');
@@ -100,7 +100,7 @@ function updateUI(mode) {
     
     const current = weatherData.current;
     
-    // Оновлено з урахуванням одиниць та мови
+    
     document.getElementById('temperature').innerText = convertTemp(current.temperature_2m) + "°";
     document.getElementById('feels-like').innerText = `${translations[currentLang].feels} ${convertTemp(current.apparent_temperature)}°`;
     
@@ -194,7 +194,7 @@ function getWeatherEmoji(code) {
     return "☁️";
 }
 
-// Пошук
+
 document.getElementById('search-btn').addEventListener('click', async () => {
     const city = document.getElementById('city-input').value;
     if(!city) return;
@@ -211,7 +211,7 @@ document.getElementById('geo-btn').addEventListener('click', () => {
     navigator.geolocation.getCurrentPosition(pos => getWeatherData(pos.coords.latitude, pos.coords.longitude));
 });
 
-// ВИПРАВЛЕНА КНОПКА SHARE
+
 document.getElementById('share-btn').addEventListener('click', async () => {
     const shareData = {
         title: 'SkyCast Pro',
@@ -230,7 +230,7 @@ document.getElementById('share-btn').addEventListener('click', async () => {
     }
 });
 
-// КРИТЕРІЙ 3: Сповіщення про офлайн
+
 window.addEventListener('offline', () => {
     document.getElementById('weather-desc').innerHTML = "<span style='color: #ffcc00;'>⚠️ Tryb Offline (Dane z pamięci)</span>";
     document.body.style.filter = "grayscale(0.3)";
@@ -242,7 +242,7 @@ window.addEventListener('online', () => {
     getWeatherData(52.23, 21.01, weatherData ? weatherData.cityName : "Warszawa");
 });
 
-// Запуск при завантаженні (з LocalStorage)
+
 window.onload = () => {
     const saved = localStorage.getItem('lastWeatherData');
     if (saved) {

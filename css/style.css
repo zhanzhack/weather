@@ -16,7 +16,7 @@ body {
     overflow-x: hidden;
 }
 
-/* СТИЛІ МЕНЮ */
+
 .side-menu {
     position: fixed;
     top: 0; left: -280px;
@@ -42,7 +42,7 @@ body {
 .menu-item { display: flex; justify-content: space-between; align-items: center; margin-bottom: 25px; }
 .mini-toggle { background: var(--card); border: 1px solid rgba(255,255,255,0.2); color: white; padding: 5px 12px; border-radius: 8px; font-size: 0.7rem; }
 
-/* РЕШТА СТИЛІВ */
+
 .app-container { width: 100%; max-width: 450px; padding: 20px 20px 100px 20px; }
 .header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
 .icon-btn { background: none; border: none; color: white; font-size: 1.5rem; cursor: pointer; }
